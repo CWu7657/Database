@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+	<head>
+		<title>Project</title>
+		
+		<link href='https://fonts.googleapis.com/css?family=Yrsa' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Suranna' rel='stylesheet'>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat Subrayada' rel='stylesheet'>
+		
+		<style>
+		
+			h1{
+				font-family: 'Montserrat Subrayada';
+				font-size: 100px;
+				color: LimeGreen;
+				text-decoration: overline;
+				text-shadow: 5px 4px yellow;
+				background-color:gray;
+				padding: 20px;
+				margin:10px;
+				display: inline-block;
+				border-radius:200px;
+				
+				width:250px;
+			
+			}
+			table, td, th {  
+				border: 1px solid #ddd;
+				text-align: left;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+				
+			}
+
+			th, td {
+				padding: 15px;
+			}
+			th{
+				text-transform: uppercase;
+				font-family: 'Yrsa';
+				font-size: 25px;
+				
+			}
+			td{
+				font-family: 'Suranna';
+				font-size: 22px;
+			}
+			tr:nth-child(even) {background-color: #DCDCDC;}
+			
+			.jumbotron{
+				background-color: RoyalBlue;
+			}
+			
+		</style>
+
+		<script src="https://code.jquery.com/jquery-3.4.1.js"
+				integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+				crossorigin="anonymous">
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+		
+        <script>
+			var data;
+			var data2;
+			
+			function getData(){
+				$.get("http://10.79.164.115:8500/alltable",function(results){
+					data = JSON.parse(results);
+					getCustomers();
+                    //document.write(data);
+				});
+			
+
+			
+			}
+			
+			function getCustomers(){
+				var build = "";
+				var output = document.getElementById("output");
+				build+= "<table>";
+				build+= 	"<tr>";
+				build+= 		"<th>" + "Movie Name" + "</th>";
+				build+= 		"<th>" + "Episodes" + "</th>";
+				build+= 		"<th>" + "Premiere Year" + "</th>";
+				build+= 		"<th>" + "Final Year" + "</th>";
+				build+= 		"<th>" + "Country" + "</th>";
+				build+= 		"<th>" + "Rating" + "</th>";
+				build+= 		"<th>" + "Director" + "</th>";
+				build+= 		"<th>" + "Genre" + "</th>";
+				build+= 		"<th>" + "Network" + "</th>";
+				build+= 	"<tr>";
+				for (var i=0; i<data.length; i++){
+					build+= 	"<tr>";
+					build+= 		"<td>" + data[i].Name + "</td>";
+					build+= 		"<td>" + data[i].Episodes + "</td>";
+					build+= 		"<td>" + data[i].PremiereYear + "</td>";
+					build+= 		"<td>" + data[i].FinalYear + "</td>";
+					build+= 		"<td>" + data[i].Country + "</td>";
+					build+= 		"<td>" + data[i].Rating + "</td>";
+					build+= 		"<td>" + data[i].Director+ "</td>";
+					build+= 		"<td>" + data[i].Genre+ "</td>";
+					build+= 		"<td>" + data[i].Network+ "</td>";
+					build+= 	"<tr>";
+				}
+				build+= "</table>"
+				output.innerHTML = build;
+				
+			}
+
+
+			
+			
+		</script>
+
+	</head>
+	<body onload = "getData()">
+		<div class="jumbotron text-center" style="margin-bottom:0">
+			<h1>ALL</h1>
+			<img src="page1pic.jpg" class="img-thumbnail">
+		</div>
+		
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<a class="navbar-brand" href="JSONconnect.html">Home</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar" >
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link"  href="Page1.html">All</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="Page2.html">Basic</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="Page3.html">Intermediate</a>
+					</li>    
+				</ul>
+			</div>  
+		</nav>
+		
+		
+		
+		<div id = "output"> </div>
+		
+		
+		
+		
+	</body>
+</html>
